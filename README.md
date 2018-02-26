@@ -1,16 +1,13 @@
-[![npm](https://img.shields.io/npm/v/nativescript-themes.svg)](https://www.npmjs.com/package/nativescript-themes)
-[![npm](https://img.shields.io/npm/l/nativescript-themes.svg)](https://www.npmjs.com/package/nativescript-themes)
-[![npm](https://img.shields.io/npm/dt/nativescript-themes.svg?label=npm%20d%2fls)](https://www.npmjs.com/package/nativescript-themes)
-
 # nativescript-themes
-A NativeScript plugin to deal with UI Themes
+A NativeScript v3.0+ plugin to deal with UI Themes. This is a fork of Nathanael Anderson's original code, updated with code from [this issue](https://github.com/NathanaelA/nativescript-themes/issues/3) thanks to other GitHub users.
 
 ## License
 
-This is released under the MIT License, meaning you are free to include this in any type of program -- However for entities that need a support contract, changes, enhancements and/or a commercial license please contact me at [http://nativescript.tools](http://nativescript.tools).
+This is released under the MIT License, meaning you are free to include this in any type of program -- However for entities that need a support contract, changes, enhancements and/or a commercial license please contact the original author Nathanael Anderson at [http://nativescript.tools](http://nativescript.tools).
 
-I also do contract work; so if you have a module you want built for NativeScript (or any other software projects) feel free to contact me [nathan@master-technology.com](mailto://nathan@master-technology.com).
+He also does contract work; so if you have a module you want built for NativeScript (or any other software projects) feel free to contact him [nathan@master-technology.com](mailto://nathan@master-technology.com).
 
+Nathanael Anderson's PayPal and Patreon links:
 [![Donate](https://img.shields.io/badge/Donate-PayPal-brightgreen.svg?style=plastic)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=HN8DDMWVGBNQL&lc=US&item_name=Nathanael%20Anderson&item_number=nativescript%2dthemes&no_note=1&no_shipping=1&currency_code=USD&bn=PP%2dDonationsBF%3ax%3aNonHosted)
 [![Patreon](https://img.shields.io/badge/Pledge-Patreon-brightgreen.svg?style=plastic)](https://www.patreon.com/NathanaelA)
 
@@ -21,7 +18,13 @@ I also do contract work; so if you have a module you want built for NativeScript
 
 ## Installation
 
-tns plugin add nativescript-themes
+This forked plugin is not yet registered on NPM, but the original is. Sorry.
+To test it out, you can install the original first:
+
+`tns plugin add nativescript-themes`
+
+...and then replace its `themes.js` with the one from this repo.
+But for production you'll want to do it properly... I'm sure you know what you're doing if you're at that level! (if not, Google/StackOverflow is your friend)
 
 
 ## Usage
@@ -60,12 +63,18 @@ Button {
 }
 ```
 
-## Demo
-Demo shows three sample themes, and shows how to load the last chosen theme at startup.
+
+## What does this module actually do?
+Digging deep inside the NativeScript core and poking it with a stick, it can change which CSS file your app uses.
+So it will replace your original "app.css" with whatever you set it to. Understanding this will help you mitigate breaking your layout (set up your CSS structure accordingly).
 
 
 ## Why use this?
 This allows you to apply a specific theme file globally so all pages get it.
+
+
+## Demo
+Demo shows three sample themes, and shows how to load the last chosen theme at startup.
 
 
 ### themes.applyTheme('cssFile', options);
