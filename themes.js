@@ -1,4 +1,7 @@
 /**********************************************************************************
+ *
+ * [ altered by Dean Huczok 26 thx to the GitHub community ]
+ *
  * (c) 2016, Master Technology
  * Licensed under the MIT license or contact me for a Support or Commercial License
  *
@@ -71,8 +74,8 @@ function internalLoadCss(cssFile, path) {
         cssFileName = fs.path.join(path, cssFileName);
     }
 
-    var changed = false, preLoaded = false;
-    var curSelectors = application.appSelectors;
+    /*var changed = false, preLoaded = false;
+    var curSelectors = application.appSelectors; <--- invalid from {N} 3.0
     for (var i=0;i<curSelectors.length;i++) {
         if (curSelectors[i]._themeFile) {
             if (curSelectors[i]._themeFile && curSelectors[i]._themeFile !== cssFileName) {
@@ -84,43 +87,51 @@ function internalLoadCss(cssFile, path) {
                 break;
             }
         }
-    }
+    }*/
 
-    var applicationCss;
-    if (!preLoaded) {
-        if (FSA.fileExists(cssFileName)) {
-            var file = fs.File.fromPath(cssFileName);
+    //var applicationCss;
+    //if (!preLoaded) {
+        if (!FSA.fileExists(cssFileName)) {
+            /*var file = fs.File.fromPath(cssFileName);
             var textCSS = file.readTextSync();
             if (textCSS) {
                 applicationCss = application.parseCss(textCSS, cssFileName);
-            }
+            }*/
+			
+			
 
             // If we fail to load the file, then we will treat it as if we had already loaded it
-            if (!applicationCss) {
-                preLoaded = true;
-            }
+            //if (!applicationCss) {
+                //preLoaded = true;
+				console.warn("failed to load theme - CSS file",cssFileName);
+				return false;
+            //}
         }
-    }
+    //}
 
-    if (changed || !preLoaded) {
+    //if (changed || !preLoaded) {
         // Trigger an update
-        application.cssSelectors = application.appSelectors.slice();
+        //application.cssSelectors = application.appSelectors.slice();
 
-        if (!preLoaded) {
+        /*if (!preLoaded) {
             for (i=0;i<applicationCss.length;i++) {
                 applicationCss[i]._themeFile = cssFileName;
                 application.cssSelectors.push(applicationCss[i]);
             }
         }
         application.appSelectors = application.cssSelectors.slice();
-        application.cssSelectorVersion++;
+        application.cssSelectorVersion++;*/
+		
+		// as per GitHub Issue:  https://github.com/NathanaelA/nativescript-themes/issues/3
+		application.setCssFileName(cssFileName);  // thx user "bgildson"
 
         // Activate new CSS
         var f = frameCommon.topmost();
+		//const f = require('ui/frame').topmost();
         if (f && f.currentPage) {
-            f.currentPage._refreshCss();
+            f.currentPage._onCssStateChange();  // thx user "erjdriver"
         }
-    }
+    //}
 }
 
 // Export the theme system
