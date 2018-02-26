@@ -1,6 +1,6 @@
 /**********************************************************************************
  *
- * [ altered by Dean Huczok 26 thx to the GitHub community ]
+ * [ altered by Dean Huczok 26th Feb 2018 thx to the GitHub community ]
  *
  * (c) 2016, Master Technology
  * Licensed under the MIT license or contact me for a Support or Commercial License
@@ -111,9 +111,9 @@ function internalLoadCss(cssFile, path) {
 
     //if (changed || !preLoaded) {
         // Trigger an update
-        //application.cssSelectors = application.appSelectors.slice();
+        /*application.cssSelectors = application.appSelectors.slice();
 
-        /*if (!preLoaded) {
+        if (!preLoaded) {
             for (i=0;i<applicationCss.length;i++) {
                 applicationCss[i]._themeFile = cssFileName;
                 application.cssSelectors.push(applicationCss[i]);
